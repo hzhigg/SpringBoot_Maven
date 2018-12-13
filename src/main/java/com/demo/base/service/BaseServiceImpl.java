@@ -49,23 +49,29 @@ public abstract class BaseServiceImpl<D extends BaseMapper<T>,T extends BaseEnti
 	
 	@Transactional(readOnly=false)
 	@Override
-	public int insertList(List<T> record) {
+	public int insertBatchSelective(List<T> record) {
 		// TODO Auto-generated method stub
-		return dao.insertList(record);
+		return dao.insertBatchSelective(record);
 	}
 	
-	@Transactional(readOnly=false)
 	@Override
-	public int deleteList(List<T> record) {
+	public int updateBatchByPrimaryKeySelective(List<T> record) {
 		// TODO Auto-generated method stub
-		return dao.deleteList(record);
+		return dao.updateBatchByPrimaryKeySelective(record);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
-	public int updateIsValidList(List<T> record, Integer isValid) {
+	public int deleteList(List<Long> idS) {
 		// TODO Auto-generated method stub
-		return dao.updateIsValidList(record, isValid);
+		return dao.deleteList(idS);
+	}
+
+	@Transactional(readOnly=false)
+	@Override
+	public int updateIsValidList(List<Long> idS, Integer isValid) {
+		// TODO Auto-generated method stub
+		return dao.updateIsValidList(idS, isValid);
 	}
 
 	@Transactional(readOnly=false)
@@ -73,6 +79,13 @@ public abstract class BaseServiceImpl<D extends BaseMapper<T>,T extends BaseEnti
 	public int updateIsValid(Long id, Integer isValid) {
 		// TODO Auto-generated method stub
 		return dao.updateIsValid(id, isValid);
+	}
+
+	@Transactional(readOnly=false)
+	@Override
+	public int updateVersionAutoIncrease(Long id) {
+		// TODO Auto-generated method stub
+		return dao.updateVersionAutoIncrease(id);
 	}
 
 	

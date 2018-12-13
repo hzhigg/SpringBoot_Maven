@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.user.mapper.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.demo.user.entity.Address">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="is_valid" jdbcType="INTEGER" property="isValid" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="web_user_id" jdbcType="BIGINT" property="webUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, create_user, is_valid, update_time, update_user, version, address, 
+    city, country, label, province, web_user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.demo.user.entity.Address">
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="isValid != null">
+        is_valid,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="webUserId != null">
+        web_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="webUserId != null">
+        #{webUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demo.user.entity.Address">
+    update address
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="isValid != null">
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="webUserId != null">
+        web_user_id = #{webUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+ 
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        id,
+      </if>
+      <if test="list[0].createTime!=null">
+        create_time,
+      </if>
+      <if test="list[0].createUser!=null">
+        create_user,
+      </if>
+      <if test="list[0].isValid!=null">
+        is_valid,
+      </if>
+      <if test="list[0].updateTime!=null">
+        update_time,
+      </if>
+      <if test="list[0].updateUser!=null">
+        update_user,
+      </if>
+      <if test="list[0].version!=null">
+        version,
+      </if>
+      <if test="list[0].address!=null">
+        address,
+      </if>
+      <if test="list[0].city!=null">
+        city,
+      </if>
+      <if test="list[0].country!=null">
+        country,
+      </if>
+      <if test="list[0].label!=null">
+        label,
+      </if>
+      <if test="list[0].province!=null">
+        province,
+      </if>
+      <if test="list[0].webUserId!=null">
+        web_user_id,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=BIGINT},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.createUser!=null">
+          #{item.createUser,jdbcType=BIGINT},
+        </if>
+        <if test="item.isValid!=null">
+          #{item.isValid,jdbcType=INTEGER},
+        </if>
+        <if test="item.updateTime!=null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateUser!=null">
+          #{item.updateUser,jdbcType=BIGINT},
+        </if>
+        <if test="item.version!=null">
+          #{item.version,jdbcType=INTEGER},
+        </if>
+        <if test="item.address!=null">
+          #{item.address,jdbcType=VARCHAR},
+        </if>
+        <if test="item.city!=null">
+          #{item.city,jdbcType=VARCHAR},
+        </if>
+        <if test="item.country!=null">
+          #{item.country,jdbcType=VARCHAR},
+        </if>
+        <if test="item.label!=null">
+          #{item.label,jdbcType=VARCHAR},
+        </if>
+        <if test="item.province!=null">
+          #{item.province,jdbcType=VARCHAR},
+        </if>
+        <if test="item.webUserId!=null">
+          #{item.webUserId,jdbcType=BIGINT},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update address
+      <set>
+        <if test="item.createTime!=null">
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.createUser!=null">
+          create_user=#{item.createUser,jdbcType=BIGINT},
+        </if>
+        <if test="item.isValid!=null">
+          is_valid=#{item.isValid,jdbcType=INTEGER},
+        </if>
+        <if test="item.updateTime!=null">
+          update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateUser!=null">
+          update_user=#{item.updateUser,jdbcType=BIGINT},
+        </if>
+        <if test="item.version!=null">
+          version=#{item.version,jdbcType=INTEGER},
+        </if>
+        <if test="item.address!=null">
+          address=#{item.address,jdbcType=VARCHAR},
+        </if>
+        <if test="item.city!=null">
+          city=#{item.city,jdbcType=VARCHAR},
+        </if>
+        <if test="item.country!=null">
+          country=#{item.country,jdbcType=VARCHAR},
+        </if>
+        <if test="item.label!=null">
+          label=#{item.label,jdbcType=VARCHAR},
+        </if>
+        <if test="item.province!=null">
+          province=#{item.province,jdbcType=VARCHAR},
+        </if>
+        <if test="item.webUserId!=null">
+          web_user_id=#{item.webUserId,jdbcType=BIGINT},
+        </if>
+      </set>
+      where 
+      id = #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <delete id="deleteList" parameterType="java.util.List">
+    delete from address where id in
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </delete>
+  <select id="findList" parameterType="com.demo.user.entity.Address" resultMap="BaseResultMap">
+    select * from address where 1=1
+    <if test="id!=null">
+       and id=#{id,jdbcType=BIGINT}
+    </if>
+    <if test="createTime!=null">
+       and create_time=#{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createUser!=null">
+       and create_user=#{createUser,jdbcType=BIGINT}
+    </if>
+    <if test="isValid!=null">
+       and is_valid=#{isValid,jdbcType=INTEGER}
+    </if>
+    <if test="updateTime!=null">
+       and update_time=#{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateUser!=null">
+       and update_user=#{updateUser,jdbcType=BIGINT}
+    </if>
+    <if test="version!=null">
+       and version=#{version,jdbcType=INTEGER}
+    </if>
+    <if test="address!=null">
+       and address=#{address,jdbcType=VARCHAR}
+    </if>
+    <if test="city!=null">
+       and city=#{city,jdbcType=VARCHAR}
+    </if>
+    <if test="country!=null">
+       and country=#{country,jdbcType=VARCHAR}
+    </if>
+    <if test="label!=null">
+       and label=#{label,jdbcType=VARCHAR}
+    </if>
+    <if test="province!=null">
+       and province=#{province,jdbcType=VARCHAR}
+    </if>
+    <if test="webUserId!=null">
+       and web_user_id=#{webUserId,jdbcType=BIGINT}
+    </if>
+  </select>
+  <update id="updateIsValidList" parameterType="java.util.Map">
+    update address
+    <set>
+      is_valid=#{isValid,jdbcType=INTEGER}
+    </set>
+     where id in
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </update>
+  <update id="updateIsValid" parameterType="java.util.Map">
+    update address
+    <set>
+      is_valid=#{isValid,jdbcType=INTEGER}
+    </set>
+     where id =#{id}
+  </update>
+  <update id="updateVersionAutoIncrease" parameterType="java.lang.Long">
+    update address
+    <set>
+      version=version+1
+    </set>
+     where id =#{id}
+  </update>
+</mapper>

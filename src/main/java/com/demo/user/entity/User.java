@@ -1,5 +1,7 @@
 package com.demo.user.entity;
 
+import java.util.List;
+
 import com.demo.base.entity.BaseEntity;
 
 import lombok.Data;
@@ -18,13 +20,33 @@ public class User extends BaseEntity<User>{
 	 */
 	private static final long serialVersionUID = -5007266232032037049L;
 
-	private String email;
+	/**
+     * 邮箱
+     * 表字段 : user.email
+     */
+    private String email;
 
+    /**
+     * 昵称
+     * 表字段 : user.nick_name
+     */
     private String nickName;
 
+    /**
+     * 密码
+     * 表字段 : user.password
+     */
     private String password;
 
+    /**
+     * 用户名
+     * 表字段 : user.user_name
+     */
     private String userName;
-
+    
+    /**
+     * 用户地址
+     */
+    private List<Address> address;
    
 }

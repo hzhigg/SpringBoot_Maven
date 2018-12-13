@@ -46,14 +46,21 @@ public abstract class BaseService<T> extends DateUtil{
 	 * @param record
 	 * @return
 	 */
-	public abstract int insertList(List<T> record);
+	public abstract int insertBatchSelective(List<T> record);
+	
+	/**
+	 * 集合更新
+	 * @param record
+	 * @return
+	 */
+	public abstract int updateBatchByPrimaryKeySelective(List<T> record);
 	
 	/**
 	 * 删除集合(物理删除)
 	 * @param record
 	 * @return
 	 */
-	public abstract int deleteList(List<T> record);
+	public abstract int deleteList(List<Long> idS);
 	
 	/**
 	 * 批量更新启用状态(软删除)
@@ -61,7 +68,7 @@ public abstract class BaseService<T> extends DateUtil{
 	 * @param isValid 是否启用，0:启用     1:不启用
 	 * @return
 	 */
-	public abstract int updateIsValidList(List<T> record,Integer isValid);
+	public abstract int updateIsValidList(List<Long> idS,Integer isValid);
 	
 	/**
 	 * 单个更新启用状态(软删除)
@@ -70,5 +77,12 @@ public abstract class BaseService<T> extends DateUtil{
 	 * @return
 	 */
 	public abstract int updateIsValid(Long id,Integer isValid);
+	
+	/**
+	 * 版本号自增+1
+	 * @param id
+	 * @return
+	 */
+	public abstract int updateVersionAutoIncrease(Long id);
 	
 }
