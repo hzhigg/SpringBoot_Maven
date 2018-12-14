@@ -1,20 +1,24 @@
 package com.demo.test;
 
-import com.demo.user.entity.User;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import com.alibaba.fastjson.JSON;
+import com.demo.user.entity.User;
+import com.demo.user.service.UserService;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class Test {
 
-	public static void main(String[] args) {
-		User u=new User();
-		u.setId(1L);
-		u.setUserName("123");
-		User u2=new User();
-		u2.setId(1L);
-		u2.setUserName("123");
-		System.out.println(u.equals(u2));
-		System.out.println(u.hashCode());
-		System.out.println(u2.hashCode());
-		System.out.println(u.toString());
+	@Autowired
+	private UserService userService;
+	
+	@org.junit.Test
+	public void test(){
+		User user=userService.selectByPrimaryKey(1L);
+		System.out.println(JSON.toJSONString(user));
 	}
-
 }
