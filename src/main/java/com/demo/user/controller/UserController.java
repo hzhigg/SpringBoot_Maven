@@ -2,7 +2,11 @@ package com.demo.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.base.controller.BaseController;
 import com.demo.global.RtnResult;
+import com.demo.global.enums.RtnResultCode;
 import com.demo.user.entity.User;
 import com.demo.user.service.UserService;
 
@@ -27,6 +32,22 @@ public class UserController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
+	@ApiOperation("未登入")
+	@GetMapping("/not-login")
+	public RtnResult notLogin(){
+		return RtnResult.Fail(RtnResultCode.NOT_LOGIN);
+	}
+	
+	@ApiOperation("模拟登入接口")
+	@GetMapping("/login")
+	public RtnResult login(HttpServletRequest request){
+		User user=userService.selectByPrimaryKey(1L);
+		if(ObjectUtils.isEmpty(user)){
+			return RtnResult.Fail(RtnResultCode.USERNAME_OR_PASS_ERROE);
+		}
+		request.getSession().setAttribute("user", user);
+		return RtnResult.Success(user);
+	}
 	
 	@ApiOperation("根据id查询用户")
 	@GetMapping("/getById")

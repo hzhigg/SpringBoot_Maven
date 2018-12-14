@@ -260,7 +260,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<select id="findList" parameterType="com.demo.user.entity.User"resultMap="BaseResultMap">
+	<select id="findList" parameterType="com.demo.user.entity.User" resultMap="BaseResultMap">
 		select * from user where 1=1
 		<if test="id!=null">
 			and id=#{id,jdbcType=BIGINT}

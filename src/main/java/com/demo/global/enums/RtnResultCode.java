@@ -4,12 +4,17 @@ package com.demo.global.enums;
 public enum RtnResultCode {
 	//=========通用状态码=================
 	FAIL(0,"Fail","失败"),
-	SUCCESS(1,"success","成功");
+	SUCCESS(1,"success","成功"),
+	NOT_LOGIN(2,"not login","请登入"),
 	
 	
 	
 	//=========用户模块状态码=================
 	//USER_NOT_EXITS(100,"","用户不存在");
+	USERNAME_OR_PASS_ERROE(100,"user accoun or password error","用户名或者密码错误"),
+	
+	
+	END(999999,"","");
 	
 	private Integer code; //状态码
 	private String msgEN; //英文消息
