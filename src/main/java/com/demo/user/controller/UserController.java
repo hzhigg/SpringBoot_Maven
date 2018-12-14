@@ -3,12 +3,13 @@ package com.demo.user.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.base.controller.BaseController;
+import com.demo.global.LogicGroup;
 import com.demo.global.RtnResult;
 import com.demo.global.enums.RtnResultCode;
 import com.demo.user.entity.User;
@@ -33,7 +35,7 @@ public class UserController extends BaseController{
 	private UserService userService;
 	
 	@ApiOperation("未登入")
-	@GetMapping("/not-login")
+	@RequestMapping("/not-login")//未登入接口必须设置可以接受所有请求方式
 	public RtnResult notLogin(){
 		return RtnResult.Fail(RtnResultCode.NOT_LOGIN);
 	}
@@ -48,6 +50,16 @@ public class UserController extends BaseController{
 		request.getSession().setAttribute("user", user);
 		return RtnResult.Success(user);
 	}
+	
+	
+	
+	@ApiOperation("插入用户")
+	@PostMapping("/insertSelective")
+	public RtnResult insertSelective(@RequestBody @Validated({LogicGroup.addGroup.class}) User user){
+		int count=userService.insertSelective(user);
+		return RtnResult.Success(count);
+	}
+	
 	
 	@ApiOperation("根据id查询用户")
 	@GetMapping("/getById")

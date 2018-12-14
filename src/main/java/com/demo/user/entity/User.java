@@ -2,7 +2,10 @@ package com.demo.user.entity;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import com.demo.base.entity.BaseEntity;
+import com.demo.global.LogicGroup;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +27,7 @@ public class User extends BaseEntity<User>{
      * 邮箱
      * 表字段 : user.email
      */
+	 @NotBlank(groups={LogicGroup.addGroup.class},message="邮箱为空")
     private String email;
 
     /**

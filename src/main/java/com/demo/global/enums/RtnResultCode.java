@@ -6,8 +6,9 @@ public enum RtnResultCode {
 	FAIL(0,"Fail","失败"),
 	SUCCESS(1,"success","成功"),
 	NOT_LOGIN(2,"not login","请登入"),
-	
-	
+	PARAMTER_IS_NULL(3,"Parameter is null","参数为空"),
+	PARAMTER_IS_ERROR(4,"Parameter is error","参数错误"),
+	SYSTEM_EXCEPTION(5,"System exception","系统异常"),
 	
 	//=========用户模块状态码=================
 	//USER_NOT_EXITS(100,"","用户不存在");

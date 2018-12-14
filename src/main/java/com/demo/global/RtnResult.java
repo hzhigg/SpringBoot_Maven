@@ -41,6 +41,10 @@ public class RtnResult {
 		return Default().setResultCode(code);
 	}
 	
+	public static RtnResult Fail(RtnResultCode code,Object data){
+		return Default().setResultCode(code,data);
+	}
+	
 	
 	public RtnResult setResultCode(RtnResultCode code,Object data){
 		this.code=code.getCode();
@@ -55,6 +59,17 @@ public class RtnResult {
 		return this;
 	}
 
+	
+	public RtnResult(Integer code,String msg){
+		this.code=code;
+		this.msg=msg;
+	}
+	
+	public RtnResult(RtnResultCode code){
+		this.code=code.getCode();
+		this.msg=code.getMsgCN();
+	}
+	
 	public RtnResult() {
 		super();
 	}
