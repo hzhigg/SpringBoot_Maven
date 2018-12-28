@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,12 +32,15 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/user")
 public class UserController extends BaseController{
 
+	@Value(value="${isPro}")
+	private String isPro;
 	@Autowired
 	private UserService userService;
 	
 	@ApiOperation("未登入")
 	@RequestMapping("/not-login")//未登入接口必须设置可以接受所有请求方式
 	public RtnResult notLogin(){
+		logger.info("============={}==============",isPro);
 		return RtnResult.Fail(RtnResultCode.NOT_LOGIN);
 	}
 	
