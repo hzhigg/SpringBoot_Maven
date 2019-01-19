@@ -23,6 +23,10 @@ import com.demo.global.RtnResult;
 import com.demo.global.enums.RtnResultCode;
 import com.demo.user.entity.User;
 import com.demo.user.service.UserService;
+import com.demo.user.vo.UserVo;
+import com.demo.util.page.ApiPageResult;
+import com.demo.util.page.PgeHeplerUtils;
+import com.github.pagehelper.Page;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -105,6 +109,15 @@ public class UserController extends BaseController{
 	public RtnResult updateVersionAutoIncrease(@RequestParam Long id){
 		int count=userService.updateVersionAutoIncrease(id);
 		return RtnResult.Success(count);
+	}
+	
+	@ApiOperation("分页查询")
+	@GetMapping("/getPage")
+	public RtnResult getPage(UserVo vo){
+		 Page<User> data = userService.getPage(vo);
+	     ApiPageResult<User> result = new ApiPageResult<>();
+	     PgeHeplerUtils.toApiPageResult(result, data);
+	     return RtnResult.Success(result);
 	}
 	
 }
