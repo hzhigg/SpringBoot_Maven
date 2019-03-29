@@ -144,6 +144,11 @@
             <artifactId>dozer</artifactId>
             <version>5.5.1</version>
         </dependency>
+        <dependency>
+		      <groupId>org.apache.commons</groupId>
+		      <artifactId>commons-text</artifactId>
+		      <version>1.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

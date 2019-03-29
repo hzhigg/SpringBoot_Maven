@@ -37,10 +37,11 @@ public class AuthFilter  implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletResponse resp = (HttpServletResponse) response;
+		XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper((HttpServletRequest) request);
 		long start = System.currentTimeMillis();
-		if(this.beforeDone(request, resp)) {
-			filterChain.doFilter(request, response);
-			this.afterDone(request, response);
+		if(this.beforeDone(xssRequest, resp)) {
+			filterChain.doFilter(xssRequest, response);
+			this.afterDone(xssRequest, response);
 		}
 		System.out.println("filter 耗时：" + (System.currentTimeMillis() - start));
 	}
