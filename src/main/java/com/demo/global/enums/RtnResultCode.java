@@ -11,6 +11,7 @@ public enum RtnResultCode {
 	SYSTEM_EXCEPTION(5,"System exception","系统异常"),
 	WARN_DOWN_FILE_TOO_LARGE(6,"Download file is too large","下载文件太大"),
 	WARN_FILE_NOT_FOUND(7, "file does not exist","文件不存在"),
+	RETRY(8,"","重新尝试"),
 	//=========用户模块状态码=================
 	//USER_NOT_EXITS(100,"","用户不存在");
 	USERNAME_OR_PASS_ERROE(100,"user accoun or password error","用户名或者密码错误"),

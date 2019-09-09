@@ -41,6 +41,10 @@ public class RtnResult {
 		return Default().setResultCode(code);
 	}
 	
+	public static RtnResult Fail(Object data){
+		return Default().setResultCode(RtnResultCode.FAIL, data);
+	}
+	
 	public static RtnResult Fail(RtnResultCode code,Object data){
 		return Default().setResultCode(code,data);
 	}

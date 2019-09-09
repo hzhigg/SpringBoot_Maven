@@ -4,6 +4,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSON;
@@ -22,6 +24,21 @@ public class Test {
 	private UserService userService;
 	@Autowired
 	private ConfigProperties configProperties;
+	
+	@Autowired
+	private RedisTemplate redisTemplate;
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
+	
+	@org.junit.Test
+	public void testRedis(){
+		redisTemplate.opsForHash().put("test", "test2", "100");
+		String v=(String) redisTemplate.opsForHash().get("test", "test2");
+		System.out.println(v);
+		redisTemplate.boundHashOps("test").increment("test", 2);
+		v=(String) redisTemplate.opsForHash().get("test", "test2");
+		System.out.println(v);
+	}
 	
 	@org.junit.Test
 	public void testCopy(){

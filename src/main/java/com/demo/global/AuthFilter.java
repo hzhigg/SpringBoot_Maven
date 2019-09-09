@@ -11,11 +11,15 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -26,6 +30,9 @@ import com.demo.user.entity.User;
 public class AuthFilter  implements Filter {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -59,6 +66,8 @@ public class AuthFilter  implements Filter {
 			excludeUri = new ArrayList<>();
 			excludeUri.add(loginRUI);
 			excludeUri.add("/user/not-login");
+			excludeUri.add("/mq");
+			excludeUri.add("/seckill");
 			excludeUri.add("/swagger-resources/configuration/security");
 			excludeUri.add("/swagger-resources/configuration/ui");
 			excludeUri.add("/swagger-resources");
@@ -95,7 +104,18 @@ public class AuthFilter  implements Filter {
 	 */
 	Object getSession(HttpServletRequest request) {
 
-		//String token = request.getHeader("token");
+		/*String token = request.getHeader("token");
+		if(StringUtils.isBlank(token)){
+			Cookie []cook= request.getCookies();
+			for(Cookie c:cook){
+				System.out.println(c.getName()+"--"+c.getValue());
+			}
+		}
+		
+		if(StringUtils.isBlank(token)){
+			return null;
+		}*/
+		//User user=(User)redisTemplate.opsForValue().get(token);
 		User user=(User) request.getSession().getAttribute("user");
 		if(!ObjectUtils.isEmpty(user)){
 			return user;

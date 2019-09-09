@@ -1,11 +1,15 @@
 package com.demo.user.controller;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,6 +44,8 @@ public class UserController extends BaseController{
 	private String isPro;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	@ApiOperation("未登入")
 	@RequestMapping("/not-login")//未登入接口必须设置可以接受所有请求方式
@@ -50,12 +56,18 @@ public class UserController extends BaseController{
 	
 	@ApiOperation("模拟登入接口")
 	@GetMapping("/login")
-	public RtnResult login(HttpServletRequest request){
+	public RtnResult login(HttpServletRequest request,HttpServletResponse response){
 		User user=userService.selectByPrimaryKey(1L);
 		if(ObjectUtils.isEmpty(user)){
 			return RtnResult.Fail(RtnResultCode.USERNAME_OR_PASS_ERROE);
 		}
+		String token="token_"+System.currentTimeMillis();
+		redisTemplate.opsForValue().set(token, user, 30, TimeUnit.SECONDS);
 		request.getSession().setAttribute("user", user);
+		Cookie cookie=new Cookie("token", token);
+		//cookie.setMaxAge(30 * 60);
+		cookie.setMaxAge(30);
+		response.addCookie(cookie);
 		return RtnResult.Success(user);
 	}
 	
