@@ -21,6 +21,8 @@ import io.swagger.annotations.ApiOperation;
 public class SeckillController extends BaseController{
 
 	@Autowired
+	private ExecutorService executorService;
+	@Autowired
 	private RedissonService redissonService;
 	@Autowired
 	private RedisTemplate redisTemplate;
@@ -147,5 +149,13 @@ public class SeckillController extends BaseController{
 	
 		return bs;
 	}
+	
+	@ApiOperation("测试线程池")
+	@GetMapping("/testExecutor")
+	public RtnResult testExecutor(){
+		executorService.testExecutor();
+		return RtnResult.Success();
+	}
+	
 	
 }

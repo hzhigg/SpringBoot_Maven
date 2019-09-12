@@ -68,6 +68,7 @@ public class AuthFilter  implements Filter {
 			excludeUri.add("/user/not-login");
 			excludeUri.add("/mq");
 			excludeUri.add("/seckill");
+			excludeUri.add("/testExecutor");
 			excludeUri.add("/swagger-resources/configuration/security");
 			excludeUri.add("/swagger-resources/configuration/ui");
 			excludeUri.add("/swagger-resources");
