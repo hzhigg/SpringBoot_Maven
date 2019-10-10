@@ -304,7 +304,7 @@ public class SHA256withRSAUtil {
     }
 
     /**
-     * 使用分期超人公钥加密
+     * 使用第三方公钥加密
      * @Param data
      */
     public String encryptByFqcrPublicKey(String data) {

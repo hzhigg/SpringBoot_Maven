@@ -1,5 +1,6 @@
 package com.demo.user.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +8,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.demo.user.vo.UserExcel;
+import com.demo.util.ExportExcelUtil;
+import com.demo.util.ExportExcelWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -130,6 +134,24 @@ public class UserController extends BaseController{
 	     ApiPageResult<User> result = new ApiPageResult<>();
 	     PgeHeplerUtils.toApiPageResult(result, data);
 	     return RtnResult.Success(result);
+	}
+
+	@ApiOperation("导出excel例子")
+	@GetMapping("/excel")
+	public void excelExport(HttpServletResponse response){
+		ExportExcelWrapper<UserExcel> util=new ExportExcelWrapper<UserExcel>();
+		List<UserExcel> users=new ArrayList<>();
+		for(int i=0;i<10;i++){
+			UserExcel u=new UserExcel();
+			u.setName("姓名"+i);
+			u.setAge(i);
+			users.add(u);
+		}
+
+		String []columnNames={"姓名","年龄"};//因为用的是反射的方式对应列头,所以这里定义的列名需要与实体名字顺序一致
+		util.exportExcel("文件名","文件名",columnNames,users,response,ExportExcelUtil.EXCEl_FILE_2007);
+
+
 	}
 	
 }
